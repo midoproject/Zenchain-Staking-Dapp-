@@ -7,7 +7,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { http } from "viem";
 import { zenchainTestnet } from "../chains/zenchain.ts";
 
-const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "demo";
+const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "3fd3eb008240501f6fe4a55a8ec1300c";
 
 const config = getDefaultConfig({
   appName: "ZenChain Staking dApp",

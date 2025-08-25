@@ -4,7 +4,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount, useBalance, useChainId, useReadContract, useWriteContract, useWaitForTransactionReceipt } from "wagmi";
 import type { Address } from "viem";
 import { parseUnits } from "viem";
-import { NATIVE_STAKING, FAST_UNSTAKE, nativeStakingAbi, fastUnstakeAbi, RewardDestination } from "../lib/stakingabi";
+import { NATIVE_STAKING, FAST_UNSTAKE, nativeStakingAbi, fastUnstakeAbi, RewardDestination } from "../lib/stakingabi.ts";
 import { useEffect, useMemo, useState } from "react";
 
 function useTxHash(txHash?: `0x${string}`) {

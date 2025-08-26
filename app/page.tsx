@@ -58,10 +58,9 @@ export default function Page() {
   const [payoutPage, setPayoutPage] = useState("0");
   const [dest, setDest] = useState(String(RewardDestination.Staked));
 
-  const bondAmtWei  = useMemo(() => bondAmt  ? parseUnits(bondAmt, 18)  : 0n, [bondAmt]);
-  const extraAmtWei = useMemo(() => extra    ? parseUnits(extra, 18)    : 0n, [extra]);
-  const unbondWei   = useMemo(() => unbondAmt? parseUnits(unbondAmt,18) : 0n, [unbondAmt]);
-
+  const bondAmtWei  = useMemo(() => bondAmt  ? parseUnits(bondAmt, 18)  : BigInt(0), [bondAmt]);
+  const extraAmtWei = useMemo(() => extra    ? parseUnits(extra, 18)    : BigInt(0), [extra]);
+  const unbondWei   = useMemo(() => unbondAmt? parseUnits(unbondAmt,18) : BigInt(0), [unbondAmt]);
   async function callNative(fn: any, args: any[] = []) {
     const hash = await writeContractAsync({ address: NATIVE_STAKING, abi: nativeStakingAbi, functionName: fn, args });
     setPendingHash(hash);

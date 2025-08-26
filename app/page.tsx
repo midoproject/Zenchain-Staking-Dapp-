@@ -83,13 +83,13 @@ export default function Page() {
       {/* header */}
       <div className="header">
         <div className="brand">
-          <Image src="/zenchain.svg" alt="ZenChain" width={36} height={36} priority />
+          <Image src="/zenchain logo.png" alt="ZenChain" width={36} height={36} priority />
           <div>
             <div className="title">ZenChain Staking dApp</div>
             <div className="subtitle">Stake ZTC on ZenChain Testnet via precompiles.</div>
           </div>
         </div>
-        <div className="by">by <strong>Mido</strong></div>
+        <div className="by">BY <strong>MIDO</strong></div>
       </div>
 
       {/* info */}

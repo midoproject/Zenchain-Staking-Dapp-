@@ -1,4 +1,4 @@
-  "use client";
+"use client";
 
 import { useEffect, useMemo, useState } from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
@@ -20,7 +20,7 @@ import {
   RewardDestination,
 } from "../lib/stakingAbi";
 
-/** Helper: track tx mining */
+/** Track tx until mined */
 function useTx(hash?: `0x${string}`) {
   const { data: receipt, isLoading } = useWaitForTransactionReceipt({
     hash,
@@ -32,12 +32,9 @@ function useTx(hash?: `0x${string}`) {
 export default function Page() {
   const { address, isConnected } = useAccount();
   const chainId = useChainId();
-  const { data: balance } = useBalance({
-    address,
-    query: { enabled: !!address },
-  });
+  const { data: balance } = useBalance({ address, query: { enabled: !!address } });
 
-  // --- reads from precompile
+  // ----- Reads from precompile
   const { data: currentEra } = useReadContract({
     address: NATIVE_STAKING,
     abi: nativeStakingAbi,
@@ -49,17 +46,17 @@ export default function Page() {
     functionName: "historyDepth",
   });
 
-  // --- write
+  // ----- Writer
   const { writeContractAsync } = useWriteContract();
 
-  // --- tx state
+  // ----- Tx state
   const [pendingHash, setPendingHash] = useState<`0x${string}` | undefined>();
   const { mined, isLoading: waiting } = useTx(pendingHash);
   useEffect(() => {
     if (mined) setPendingHash(undefined);
   }, [mined]);
 
-  // --- inputs
+  // ----- Inputs
   const [bondAmt, setBondAmt] = useState("");
   const [payee, setPayee] = useState("");
   const [extra, setExtra] = useState("");
@@ -72,7 +69,7 @@ export default function Page() {
   const [payoutPage, setPayoutPage] = useState("0");
   const [dest, setDest] = useState(String(RewardDestination.Staked));
 
-  // --- parsed amounts (tanpa literal 0n)
+  // ----- Parsed amounts (tanpa literal 0n)
   const bondAmtWei = useMemo(
     () => (bondAmt ? parseUnits(bondAmt, 18) : BigInt(0)),
     [bondAmt]
@@ -86,31 +83,36 @@ export default function Page() {
     [unbondAmt]
   );
 
-  // --- helpers (HARUS di atas return)
-  async function callNative(functionName: any, args: any[] = []) {
-    const hash = await writeContractAsync({
-      address: NATIVE_STAKING,
-      abi: nativeStakingAbi,
-      functionName,
-      args,
-    });
-    setPendingHash(hash);
-  }
-  async function callFast(functionName: any, args: any[] = []) {
-    const hash = await writeContractAsync({
-      address: FAST_UNSTAKE,
-      abi: fastUnstakeAbi,
-      functionName,
-      args,
-    });
-    setPendingHash(hash);
-  }
+  // ===== Helpers (pastikan di atas return)
   function pctToPerbill(pct: number) {
     // perbill = pct * 1e9 / 100
     return BigInt(Math.round(pct * 1e7));
   }
 
-  // --- UI
+  // HANYA kirim `args` jika ada — cocok untuk fungsi tanpa argumen (wagmi strict)
+  async function callNative(functionName: string, args?: readonly unknown[]) {
+    const cfg: any = {
+      address: NATIVE_STAKING,
+      abi: nativeStakingAbi,
+      functionName: functionName as any,
+    };
+    if (args && args.length > 0) cfg.args = args as any;
+    const hash = await writeContractAsync(cfg);
+    setPendingHash(hash);
+  }
+
+  async function callFast(functionName: string, args?: readonly unknown[]) {
+    const cfg: any = {
+      address: FAST_UNSTAKE,
+      abi: fastUnstakeAbi,
+      functionName: functionName as any,
+    };
+    if (args && args.length > 0) cfg.args = args as any;
+    const hash = await writeContractAsync(cfg);
+    setPendingHash(hash);
+  }
+  // ===== End Helpers
+
   return (
     <main className="container" style={{ padding: "24px", maxWidth: 920, margin: "0 auto" }}>
       <h1>ZenChain Staking dApp</h1>
@@ -137,11 +139,7 @@ export default function Page() {
             <hr style={{ margin: "12px 0", borderColor: "#2a2a2a" }} />
             <div style={{ fontSize: 12 }}>
               Tx:{" "}
-              <a
-                href={`https://zentrace.io/tx/${pendingHash}`}
-                target="_blank"
-                rel="noreferrer"
-              >
+              <a href={`https://zentrace.io/tx/${pendingHash}`} target="_blank" rel="noreferrer">
                 {pendingHash}
               </a>{" "}
               {waiting ? "(waiting…)" : "(mined ✓)"}
@@ -176,18 +174,14 @@ export default function Page() {
             <button
               disabled={!isConnected || bondAmtWei === BigInt(0)}
               onClick={async () => {
-                await callNative("bondWithRewardDestination", [
-                  bondAmtWei,
-                  Number(dest),
-                ]);
+                await callNative("bondWithRewardDestination", [bondAmtWei, Number(dest)]);
               }}
             >
               Bond + set destination
             </button>
           </div>
           <p style={{ color: "#888", fontSize: 12, marginTop: 8 }}>
-            Calls <code>bondWithRewardDestination(value,dest)</code>. Precompile:{" "}
-            {NATIVE_STAKING}
+            Calls <code>bondWithRewardDestination(value,dest)</code>. Precompile: {NATIVE_STAKING}
           </p>
         </div>
 

@@ -5,16 +5,21 @@ import { RainbowKitProvider, getDefaultConfig, darkTheme } from "@rainbow-me/rai
 import { WagmiProvider } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { http } from "viem";
-import { zenchainTestnet } from "../chains/zenchain.ts";
+// ✅ pakai path relatif
+import { zenchainTestnet } from "../chains/zenchain";
 
-const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "3fd3eb008240501f6fe4a55a8ec1300c";
+// sudah fix projectId kamu
+const projectId = "3fd3eb008240501f6fe4a55a8ec1300c";
 
 const config = getDefaultConfig({
-  appName: "zenChain staking dapp",
+  appName: "ZenChain Staking dApp",
   projectId,
   chains: [zenchainTestnet],
   transports: {
-    [zenchainTestnet.id]: http(process.env.NEXT_PUBLIC_ZENCHAIN_RPC_HTTP || "https://zenchain-testnet.api.onfinality.io/public")
+    [zenchainTestnet.id]: http(
+      process.env.NEXT_PUBLIC_ZENCHAIN_RPC_HTTP ||
+        "https://zenchain-testnet.api.onfinality.io/public"
+    )
   },
   ssr: true
 });
@@ -25,10 +30,8 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <RainbowKitProvider theme={darkTheme()}>
-          {children}
-        </RainbowKitProvider>
+        <RainbowKitProvider theme={darkTheme()}>{children}</RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
   );
-}
+      }

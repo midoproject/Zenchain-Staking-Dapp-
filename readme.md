@@ -1,43 +1,37 @@
 # ZenChain Staking dApp
 
-A decentralized application (dApp) built with **Next.js 14**, **wagmi**, **viem**, and **RainbowKit**,  
-to interact with **ZenChain Testnet staking precompiles**.
+A simple decentralized application (dApp) to **stake ZTC on the ZenChain Testnet**, built with **Next.js 14**, **RainbowKit**, and **wagmi**.
 
 ---
 
 ## 🚀 Features
-
-- 🔗 **Connect Wallet** (RainbowKit + wagmi)
-- 💰 **Check Balance & Chain Info** (ZTC on chain ID 8408)
-- 📈 **Stake (bond)** with reward destination or custom payee
-- 🧑‍⚖️ **Validate / Nominate** validators
-- ➕ **Bond Extra** (add stake)
-- 🔄 **Set Reward Destination or Payee**
-- 💤 **Chill & Unbond**
-- 💸 **Withdraw Unbonded**
-- ⚡ **Fast Unstake** (register/deregister)
-- 🎁 **Claim Rewards** (payout by page)
-
-All calls use **precompiled contracts**:  
-- `0x0000000000000000000000000000000000000800` → Native Staking  
-- `0x0000000000000000000000000000000000000801` → Fast Unstake
+- 🔗 Connect wallet (RainbowKit + WalletConnect)  
+- 💳 Display user address, ZTC balance, and Chain ID  
+- 📜 Show staking precompile contract address  
 
 ---
 
-## 🛠 Prerequisites
+## ⚡ Deployment
 
-- Node.js 18+  
-- Wallet (MetaMask, Rabby, OKX, dll)  
-- WalletConnect Project ID (get one at https://cloud.walletconnect.com/)  
+1. **Fork or clone** this repository  
+2. **Push** it to your own GitHub repo  
+3. Deploy on [Vercel](https://vercel.com/new)  
+   - Framework preset: **Next.js** (auto-detected)  
+   - Root Directory: `./`  
+   - No environment variable needed for WalletConnect (Project ID is already hardcoded)  
+   - (Optional) add `NEXT_PUBLIC_ZENCHAIN_RPC_HTTP` if you want to use a custom RPC  
+4. Click **Deploy** 🚀  
 
 ---
 
-## ⚡ Quick Start
+## 🔗 ZenChain Testnet Info
+- **Chain ID**: `8408`  
+- **RPC HTTP**: `https://zenchain-testnet.api.onfinality.io/public`  
+- **RPC WS**: `wss://zenchain-testnet.api.onfinality.io/public-ws`  
+- **Explorer**: [ZenTrace](https://zentrace.io)  
+- **Faucet**: [ZenChain Faucet](https://faucet.zenchain.io)  
 
-```bash
-# install deps
-npm install
-# or yarn / pnpm
+---
 
-# run local dev
-npm run dev
+## 📝 License
+MIT © 2025

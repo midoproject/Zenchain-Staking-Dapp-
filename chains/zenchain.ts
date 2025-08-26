@@ -1,21 +1,21 @@
-import { defineChain } from "viem";
+import type { Chain } from "wagmi/chains";
 
-export const zenchainTestnet = defineChain({
+export const zenchainTestnet: Chain = {
   id: 8408,
   name: "ZenChain Testnet",
-  nativeCurrency: { name: "ZTC", symbol: "ZTC", decimals: 18 },
+  nativeCurrency: { name: "ZenChain Token", symbol: "ZTC", decimals: 18 },
   rpcUrls: {
     default: {
-      http: ["https://zenchain-testnet.api.onfinality.io/public"],
-      webSocket: ["wss://zenchain-testnet.api.onfinality.io/public-ws"]
+      http: [process.env.NEXT_PUBLIC_ZENCHAIN_RPC_HTTP || "https://zenchain-testnet.api.onfinality.io/public"],
+      webSocket: ["wss://zenchain-testnet.api.onfinality.io/public-ws"],
     },
     public: {
-      http: ["https://zenchain-testnet.api.onfinality.io/public"],
-      webSocket: ["wss://zenchain-testnet.api.onfinality.io/public-ws"]
-    }
+      http: [process.env.NEXT_PUBLIC_ZENCHAIN_RPC_HTTP || "https://zenchain-testnet.api.onfinality.io/public"],
+      webSocket: ["wss://zenchain-testnet.api.onfinality.io/public-ws"],
+    },
   },
   blockExplorers: {
-    default: { name: "ZenTrace", url: "https://zentrace.io" }
+    default: { name: "ZenTrace", url: "https://zentrace.io" },
   },
-  testnet: true
-});
+  testnet: true,
+};

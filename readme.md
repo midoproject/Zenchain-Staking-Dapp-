@@ -46,3 +46,6 @@ A full-featured decentralized application (dApp) to **stake ZTC on the ZenChain 
 ---
 
 ## 🏗 Project Structure
+
+zenchain-staking-dapp/ ├── app/ │   ├── globals.css         # Global CSS styles │   ├── layout.tsx          # Root layout with Providers │   ├── page.tsx            # Main staking UI (connect, stake, bond, unbond, etc.) │   └── providers.tsx       # RainbowKit + wagmi + React Query setup │ ├── chains/ │   └── zenchain.ts         # ZenChain Testnet chain configuration │ ├── lib/ │   └── stakingAbi.ts       # Precompile ABIs (staking + fast-unstake) │ ├── .env.example            # Example environment variables ├── .gitignore              # Ignore build / env / cache files ├── next-env.d.ts           # Next.js type definitions ├── next.config.mjs         # Next.js configuration ├── package.json            # Dependencies & scripts ├── tsconfig.json           # TypeScript configuration └── README.md               # Project documentation
+

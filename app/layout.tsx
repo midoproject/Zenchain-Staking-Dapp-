@@ -1,9 +1,10 @@
+import type { Metadata } from "next";
 import "./globals.css";
 import Providers from "./providers";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "ZenChain Staking dApp",
-  description: "Stake ZTC on ZenChain Testnet via precompiles"
+  description: "Stake ZTC on ZenChain Testnet",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

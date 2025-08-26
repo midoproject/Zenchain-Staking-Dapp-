@@ -46,7 +46,7 @@ A full-featured decentralized application (dApp) to **stake ZTC on the ZenChain 
 ---
 
 ## 🏗 Project Structure
-
+```
 zenchain-staking-dapp/
 ├── app/
 │   ├── globals.css         # Global CSS styles
@@ -67,3 +67,4 @@ zenchain-staking-dapp/
 ├── package.json            # Dependencies & scripts
 ├── tsconfig.json           # TypeScript configuration
 └── README.md               # Project documentation
+```

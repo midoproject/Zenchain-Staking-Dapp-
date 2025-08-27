@@ -24,6 +24,59 @@ html, body { margin:0; padding:0; background:var(--bg); color:var(--text); font-
 .card { border:1px solid var(--line); background:var(--surface); border-radius:14px; padding:16px; }
 .card h3 { margin:0 0 12px 0; font-size:16px; font-weight:700; }
 .card p.meta { color:var(--muted); font-size:12px; margin-top:8px; }
+/* --- Clean form look --- */
+.card { display:flex; flex-direction:column; gap:12px; }
+.card h3 { margin:0 0 6px; font-weight:600; }
+.card label { font-size:12px; color:rgba(255,255,255,.7); }
+
+.input,
+.card input,
+.card select,
+.card textarea {
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.03);
+  color: #fff;
+  outline: none;
+}
+
+.card textarea {
+  height: auto;
+  min-height: 72px;
+  padding: 10px 12px;
+  line-height: 1.5;
+}
+
+.card input::placeholder,
+.card textarea::placeholder {
+  color: rgba(255,255,255,.45);
+}
+
+.btn { height: 36px; padding: 0 12px; border-radius: 10px; }
+.btn.primary { background: #4f46e5; border: 1px solid rgba(255,255,255,.08); }
+.btn:disabled { opacity:.6; cursor:not-allowed; }
+
+/* Stat & address text truncate */
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Subtle helper text */
+.meta {
+  margin-top: 6px;
+  font-size: 11px;
+  color: rgba(255,255,255,.55);
+}
+
+/* Grid spacing on mobile */
+.grid.two { display:grid; grid-template-columns: 1fr; gap:16px; }
+@media (min-width: 880px) {
+  .grid.two { grid-template-columns: 1fr 1fr; }
+}
 
 /* inputs & buttons */
 label { display:block; font-size:12px; color:var(--muted); margin-top:8px; }

@@ -60,11 +60,14 @@ zenchain-staking-dapp/
 ├── lib/
 │   └── stakingAbi.ts       # Precompile ABIs (staking + fast-unstake)
 │
+├── public/
+│   └── zenchain logo.png   # Zenchain Logo  ( png )
+│
 ├── .env.example            # Example environment variables
 ├── .gitignore              # Ignore build / env / cache files
 ├── next-env.d.ts           # Next.js type definitions
 ├── next.config.mjs         # Next.js configuration
 ├── package.json            # Dependencies & scripts
 ├── tsconfig.json           # TypeScript configuration
-└── README.md               # Project documentation
+└── readme.md               # Project documentation
 ```

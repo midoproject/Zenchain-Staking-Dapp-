@@ -137,10 +137,7 @@ export default function Page() {
               onClick={async()=>{ await callNative("bondWithRewardDestination", [bondAmtWei, Number(dest)]); }}>
               Bond + set destination
             </button>
-          </div>
-          <p className="meta">Calls <code>bondWithRewardDestination(value,dest)</code>. Precompile: {NATIVE_STAKING}</p>
-        </div>
-
+           
         <div className="card">
           <h3>Bond to custom payee</h3>
           <label>Amount (ZTC)</label>

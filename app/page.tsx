@@ -155,7 +155,7 @@ export default function Page() {
       <div className="header">
         <div className="brand">
           <Image
-            src="/zenchain.svg"
+            src="/zenchain logo.png"
             alt="ZenChain"
             width={36}
             height={36}
